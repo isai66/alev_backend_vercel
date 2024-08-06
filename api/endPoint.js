@@ -10,6 +10,7 @@ const {producto, TraerHombre, InsertarCarro, TraerCarrito, Mas, Menos, EliminarC
 const {productosGeneral} = require('../controllers/productosGeneral')
 const {consultaCarroUsuario} = require('../controllers/consultaCarroUsuario')
 const {pedidoEstado} = require('../controllers/pedidoEstado')
+const {usuarioExiste} = require('../controllers/usuarioExiste')
 
 router.get('/ping', ping);
 router.get('/hombres', TraerHombre);
@@ -22,7 +23,7 @@ router.get('/producto', producto);
 router.get('/productosGeneral', productosGeneral);
 router.get('/consultaCarroUsuario',consultaCarroUsuario);
 router.get('/pedidoEstado', pedidoEstado);
-
+router.get('/usuarioExiste', usuarioExiste);
 
 //insertar carrito
 router.post('/InsertarCarro', InsertarCarro);

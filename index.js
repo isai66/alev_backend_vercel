@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const mysql = require("mysql");
 const cors = require('cors');
+const axios = require('axios');
 const routes = require('./api/endPoint')
 
 
@@ -19,6 +20,25 @@ app.use(cors());
     methods: ['GET', 'POST', 'PUT', 'DELETE'], // Permitir ciertos métodos HTTP
    allowedHeaders: ['Content-Type', 'Authorization'] // Permitir ciertos encabezados personalizados
   }));*/
+
+
+  app.get('/codigo_postal', (req, res) => {
+    const { cp } = req.query;
+    axios.get(`https://api.tau.com.mx/dipomex/v1/codigo_postal?cp=${cp}`, {
+        headers: {
+            'APIKEY': '25c492cbb417541887d5e55769f370f6fb775efc'
+        }
+    })
+    .then(response => {
+        res.json(response.data);
+    })
+    .catch(error => {
+        res.status(500).send(error.message);
+    });
+});
+
+
+  
 app.use('/', routes);
 
 
