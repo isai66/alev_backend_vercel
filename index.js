@@ -14,9 +14,7 @@ app.listen(3001,()=>{
     console.log("El servidor esta corriendo en el puerto 3001")
 })
 
-app.use(cors({
-    origin: 'https://alevosia-vercel.vercel.app' // Reemplaza con el origen de tu frontend
-}));
+app.use(cors());
 /*app.use(cors({
     origin: ["http://localhost:5173"], // Permitir todos los orígenes
     methods: ['GET', 'POST', 'PUT', 'DELETE'], // Permitir ciertos métodos HTTP
