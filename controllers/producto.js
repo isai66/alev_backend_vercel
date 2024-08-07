@@ -78,7 +78,7 @@ module.exports.InsertarCarro = (req,res) =>{
 module.exports.TraerCarrito = (req,res) =>{
     try {
         const usuario = req.params.idUser
-        db.query('SELECT c.id_carrito, c.id_producto, c.id_usuario, c.cantidad_producto, p.Nombre AS Nombre_Prenda, p.Descripcion AS Descripcion_Prenda, p.Imagen AS Imagen_Prenda, P.Precio AS Precio FROM carritos c JOIN tblprenda p ON c.id_producto = p.ID_Prenda WHERE c.id_usuario = ?', [usuario], (err,result)=>{
+        db.query('SELECT c.id_carrito, c.id_producto, c.id_usuario, c.cantidad_producto, p.Nombre AS Nombre_Prenda, p.Descripcion AS Descripcion_Prenda, p.Imagen AS Imagen_Prenda, p.Precio AS Precio FROM carritos c JOIN tblprenda p ON c.id_producto = p.ID_Prenda WHERE c.id_usuario = ?', [usuario], (err,result)=>{
             if(err){
                 console.log(err);
                 res.status(500).json(['Error'])
