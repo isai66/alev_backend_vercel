@@ -5,15 +5,6 @@ const cors = require('cors');
 const axios = require('axios');
 const routes = require('./api/endPoint')
 
-
-
-app.use(express.json());
-app.use(express.urlencoded({extended:true}));
-
-app.listen(3001,()=>{
-    console.log("El servidor esta corriendo en el puerto 3001")
-})
-
 app.use(cors());
 /*app.use(cors({
     origin: ["http://localhost:5173"], // Permitir todos los orígenes
@@ -21,6 +12,12 @@ app.use(cors());
    allowedHeaders: ['Content-Type', 'Authorization'] // Permitir ciertos encabezados personalizados
   }));*/
 
+app.use(express.json());
+app.use(express.urlencoded({extended:true}));
+
+app.listen(3001,()=>{
+    console.log("El servidor esta corriendo en el puerto 3001")
+})
 
   app.get('/codigo_postal', (req, res) => {
     const { cp } = req.query;
