@@ -10,7 +10,11 @@ const {producto, TraerHombre, InsertarCarro, TraerCarrito, Mas, Menos, EliminarC
 const {productosGeneral} = require('../controllers/productosGeneral')
 const {consultaCarroUsuario} = require('../controllers/consultaCarroUsuario')
 const {pedidoEstado} = require('../controllers/pedidoEstado')
-const {usuarioExiste} = require('../controllers/usuarioExiste')
+const {usuarioExiste} = require('../controllers/usuarioExiste');
+const { productosPred } = require('../controllers/productosPred');
+const { usersAdmin, convertToEmployee } = require('../controllers/usersAdmin');
+const { usersNormal, convertToUser } = require('../controllers/usersNormal');
+const { getUserData, updateUser, deleteUser } = require('../controllers/getUserData');
 
 router.get('/ping', ping);
 router.get('/hombres', TraerHombre);
@@ -24,6 +28,15 @@ router.get('/productosGeneral', productosGeneral);
 router.get('/consultaCarroUsuario',consultaCarroUsuario);
 router.get('/pedidoEstado', pedidoEstado);
 router.get('/usuarioExiste', usuarioExiste);
+router.get('/productosPred', productosPred);
+router.get('/usersAdmin', usersAdmin);
+router.post('/convertToEmployee/:id', convertToEmployee);
+router.get('/usersNormal', usersNormal);
+router.post('/convertToUser/:id', convertToUser);
+
+router.get('/getUserData/:id', getUserData);
+router.put('/updateUser/:id', updateUser);
+router.delete('/deleteUser/:id', deleteUser);
 
 //insertar carrito
 router.post('/InsertarCarro', InsertarCarro);

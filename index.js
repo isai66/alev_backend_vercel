@@ -19,6 +19,9 @@ app.listen(3001,()=>{
     console.log("El servidor esta corriendo en el puerto 3001")
 })
 
+
+
+
   app.get('/codigo_postal', (req, res) => {
     const { cp } = req.query;
     axios.get(`https://api.tau.com.mx/dipomex/v1/codigo_postal?cp=${cp}`, {
@@ -33,6 +36,34 @@ app.listen(3001,()=>{
         res.status(500).send(error.message);
     });
 });
+
+app.get('/discounted-products', async (req, res) => {
+    try {
+        // Obtén los productos de la base de datos (este es un ejemplo simplificado)
+        const products = await getProductsFromDatabase(); // Implementa esta función
+
+        // Envía cada producto al servidor Flask para determinar si merece descuento
+        const discountedProducts = [];
+
+        for (let product of products) {
+            const prediction = await axios.post('http://localhost:5000/predict_discount', product);
+            if (prediction.data.descuento) {
+                discountedProducts.push(product);
+            }
+
+            // Limita el número de productos a 10
+            if (discountedProducts.length >= 10) {
+                break;
+            }
+        }
+
+        res.json(discountedProducts);
+    } catch (error) {
+        console.error('Error al obtener productos con descuento:', error);
+        res.status(500).send('Error interno del servidor');
+    }
+});
+  
 
 
   

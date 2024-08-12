@@ -6,7 +6,7 @@ module.exports.login = (req,res) =>  {
     console.log(loginUsuario);
     console.log(loginContrasena);   
     const consult = 'SELECT * FROM usuarios WHERE username = ? && passwords = ?';
-    const consult2 = 'SELECT * FROM empleado WHERE username = ? && contrasenia = ?';
+    const consult2 = 'SELECT * FROM empleado WHERE username = ? && passwords = ?';
 
     try{
         const ipAddress = req.ip;
