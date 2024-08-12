@@ -15,6 +15,7 @@ const { productosPred } = require('../controllers/productosPred');
 const { usersAdmin, convertToEmployee } = require('../controllers/usersAdmin');
 const { usersNormal, convertToUser } = require('../controllers/usersNormal');
 const { getUserData, updateUser, deleteUser } = require('../controllers/getUserData');
+const { updateAdmin, getAdminData, deleteAdmin } = require('../controllers/getAdminData');
 
 router.get('/ping', ping);
 router.get('/hombres', TraerHombre);
@@ -37,6 +38,10 @@ router.post('/convertToUser/:id', convertToUser);
 router.get('/getUserData/:id', getUserData);
 router.put('/updateUser/:id', updateUser);
 router.delete('/deleteUser/:id', deleteUser);
+
+router.get('/getAdminData/:id', getAdminData);
+router.put('/updateAdmin/:id', updateAdmin);
+router.delete('/deleteAdmin/:id', deleteAdmin);
 
 //insertar carrito
 router.post('/InsertarCarro', InsertarCarro);
