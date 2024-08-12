@@ -5,12 +5,12 @@ const cors = require('cors');
 const axios = require('axios');
 const routes = require('./api/endPoint')
 
-app.use(cors());
-/*app.use(cors({
-    origin: ["http://localhost:5173"], // Permitir todos los orígenes
+//app.use(cors());
+app.use(cors({
+    origin: ["https://alevosia-vercel.vercel.app"], // Permitir todos los orígenes
     methods: ['GET', 'POST', 'PUT', 'DELETE'], // Permitir ciertos métodos HTTP
    allowedHeaders: ['Content-Type', 'Authorization'] // Permitir ciertos encabezados personalizados
-  }));*/
+  }));
 
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
