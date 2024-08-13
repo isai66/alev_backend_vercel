@@ -5,7 +5,23 @@ const cors = require('cors');
 const axios = require('axios');
 const routes = require('./api/endPoint')
 
-app.use(cors());
+const allowedOrigins = ['https://alevosia-vercel.vercel.app', 'https://alevosia.host8b.me'];
+
+const corsOptions = {
+  origin: (origin, callback) => {
+    // Verificar si el origen de la solicitud está en la lista de permitidos
+    if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+};
+
+// Usar CORS con las opciones configuradas
+app.use(cors(corsOptions));
+
+//app.use(cors());
 /*app.use(cors({
     origin: ["https://alevosia-vercel.vercel.app"], // Permitir todos los orígenes
     methods: ['GET', 'POST', 'PUT', 'DELETE'], // Permitir ciertos métodos HTTP
