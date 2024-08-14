@@ -5,7 +5,7 @@ const cors = require('cors');
 const axios = require('axios');
 const routes = require('./api/endPoint')
 
-const allowedOrigins = ['https://alevosia-vercel.vercel.app', 'https://alevosia.host8b.me'];
+const allowedOrigins = ['https://alevosia-vercel.vercel.app/', 'https://alevosia.host8b.me/'];
 
 const corsOptions = {
   origin: (origin, callback) => {
