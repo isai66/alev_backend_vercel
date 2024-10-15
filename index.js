@@ -19,9 +19,9 @@ const corsOptions = {
 };
 
 // Usar CORS con las opciones configuradas
-app.use(cors(corsOptions));
+//app.use(cors(corsOptions));
 
-//app.use(cors());
+app.use(cors());
 /*app.use(cors({
     origin: ["https://alevosia-vercel.vercel.app"], // Permitir todos los orígenes
     methods: ['GET', 'POST', 'PUT', 'DELETE'], // Permitir ciertos métodos HTTP
