@@ -3,6 +3,7 @@ const router = express.Router();
 
 const {ping} = require('../controllers/pingController')
 const {login} = require('../controllers/loginController')
+const { uploadFile } = require('../controllers/actualizarFoto'); // Ruta ajustada al archivo
 const {bitacora} = require('../controllers/bitacora')
 const {bitacora_logins} = require('../controllers/bitacora_logins')
 const {signup} = require('../controllers/signup')
@@ -42,6 +43,9 @@ router.delete('/deleteUser/:id', deleteUser);
 router.get('/getAdminData/:id', getAdminData);
 router.put('/updateAdmin/:id', updateAdmin);
 router.delete('/deleteAdmin/:id', deleteAdmin);
+
+router.post('/upload', uploadFile);
+
 
 //insertar carrito
 router.post('/InsertarCarro', InsertarCarro);
