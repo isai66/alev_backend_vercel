@@ -8,7 +8,7 @@ module.exports.uploadFile = async (req, res) => {
   const file = req.file;
 
   if (!file || !user) {
-    return res.status(400).json({ done: false, message: `Archivo o usuario no proporcionado: ${user} ${file}` });
+    return res.status(400).json({ done: false, message: `Archivo o usuario no proporcionado: usuario ${user} archivo ${file}` });
   }
 
   const targetDir = path.join(__dirname, '../assets/imagenes/');
