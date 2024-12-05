@@ -9,7 +9,9 @@ const cors = require('cors');
 
 // Permitir solicitudes desde un dominio específico
 const corsOptions = {
-    origin: '*',
+origin: (origin, callback) => {
+        callback(null, true); // Permite cualquier origen
+    },
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization']
 };
