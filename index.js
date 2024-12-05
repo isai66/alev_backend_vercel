@@ -1,18 +1,22 @@
 const express = require("express");
 const app = express();
 const mysql = require("mysql");
-const cors = require('cors');
 const axios = require('axios');
 const routes = require('./api/endPoint');
 
 // Permitir todos los orígenes con CORS
-app.use(cors());
+const cors = require('cors');
 
-// Deshabilitar la caché en las respuestas del servidor
-app.use((req, res, next) => {
-    res.setHeader('Cache-Control', 'no-store');
-    next();
-});
+// Permitir solicitudes desde un dominio específico
+const corsOptions = {
+    origin: 'https://alevosia-vercel.vercel.app',
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: true, // Permite el uso de cookies si es necesario
+};
+
+app.use(cors(corsOptions));
+
 
 // Middleware para analizar solicitudes JSON y codificadas en URL
 app.use(express.json());
