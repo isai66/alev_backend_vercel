@@ -3,42 +3,28 @@ const app = express();
 const mysql = require("mysql");
 const cors = require('cors');
 const axios = require('axios');
-const routes = require('./api/endPoint')
+const routes = require('./api/endPoint');
 
-const allowedOrigins = ['https://alevosia-vercel.vercel.app', 'https://alevosia.host8b.me'];
-
-const corsOptions = {
-  origin: (origin, callback) => {
-    // Verificar si el origen de la solicitud está en la lista de permitidos
-    if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
-};
-
-// Usar CORS con las opciones configuradas
-//app.use(cors(corsOptions));
-
+// Permitir todos los orígenes con CORS
 app.use(cors());
-/*app.use(cors({
-    origin: ["https://alevosia-vercel.vercel.app"], // Permitir todos los orígenes
-    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Permitir ciertos métodos HTTP
-   allowedHeaders: ['Content-Type', 'Authorization'] // Permitir ciertos encabezados personalizados
-  }));*/
 
+// Deshabilitar la caché en las respuestas del servidor
+app.use((req, res, next) => {
+    res.setHeader('Cache-Control', 'no-store');
+    next();
+});
+
+// Middleware para analizar solicitudes JSON y codificadas en URL
 app.use(express.json());
-app.use(express.urlencoded({extended:true}));
+app.use(express.urlencoded({ extended: true }));
 
-app.listen(3001,()=>{
-    console.log("El servidor esta corriendo en el puerto 3001")
-})
+// Inicializar el servidor en el puerto 3001
+app.listen(3001, () => {
+    console.log("El servidor está corriendo en el puerto 3001");
+});
 
-
-
-
-  app.get('/codigo_postal', (req, res) => {
+// Endpoint para obtener datos de código postal
+app.get('/codigo_postal', (req, res) => {
     const { cp } = req.query;
     axios.get(`https://api.tau.com.mx/dipomex/v1/codigo_postal?cp=${cp}`, {
         headers: {
@@ -53,6 +39,7 @@ app.listen(3001,()=>{
     });
 });
 
+// Endpoint para obtener productos con descuento (ejemplo)
 app.get('/discounted-products', async (req, res) => {
     try {
         // Obtén los productos de la base de datos (este es un ejemplo simplificado)
@@ -79,45 +66,38 @@ app.get('/discounted-products', async (req, res) => {
         res.status(500).send('Error interno del servidor');
     }
 });
-  
 
-
-  
+// Agregar las rutas adicionales
 app.use('/', routes);
 
-
-
-
-/*app.post("/login",(req,res)=>{
-
+/* 
+// Si usas autenticación o necesitas bitácoras, descomenta y ajusta este bloque
+app.post("/login", (req, res) => {
     const loginUsuario = req.body.loginUsuario;
     const loginContrasena = req.body.loginContrasena;
 
     const ipAddress = req.ip;
 
-    db.query('SELECT * FROM usuarios WHERE username = ? && passwords = ?',[loginUsuario,loginContrasena],
-    (err,result)=>{
-        if(err){
-            res.send({error: err});
+    db.query('SELECT * FROM usuarios WHERE username = ? && passwords = ?', [loginUsuario, loginContrasena],
+    (err, result) => {
+        if (err) {
+            res.send({ error: err });
         }
-        if(result.length > 0){
-
+        if (result.length > 0) {
             const usuarios = result[0];
             const loginTime = new Date().toISOString();
             const insertQuery = `INSERT INTO bitacora_logins (ip, tipo, date, username, email) VALUES (?, ?, ?, ?, ?)`;
-            db.query(insertQuery, [ipAddress,'Login', loginTime, usuarios.username, usuarios.email], (err) => {
+            db.query(insertQuery, [ipAddress, 'Login', loginTime, usuarios.username, usuarios.email], (err) => {
                 if (err) {
-                res.status(500).send('Error al registrar inicio de sesión');
-                return;
-                }})
-
-            res.send(result)
-
-            
-        }
-        else{
+                    res.status(500).send('Error al registrar inicio de sesión');
+                    return;
+                }
+            });
+            res.send(result);
+        } else {
             console.log("Los datos no coinciden");
-            res.send({message:"Los datos no coinciden"});
+            res.send({ message: "Los datos no coinciden" });
         }
-    })
-});*/
+    });
+});
+*/
