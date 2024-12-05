@@ -9,7 +9,7 @@ const cors = require('cors');
 
 // Permitir solicitudes desde un dominio específico
 const corsOptions = {
-    origin: 'https://alevosia-vercel.vercel.app',
+    origin: '*',
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization'],
     credentials: true, // Permite el uso de cookies si es necesario
