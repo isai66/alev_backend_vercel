@@ -13,8 +13,7 @@ origin: (origin, callback) => {
         callback(null, true); // Permite cualquier origen
     },
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
-    credentials: true // Si necesitas enviar cookies o credenciales
+    allowedHeaders: ['Content-Type', 'Authorization']
 };
 
 app.use(cors(corsOptions));
